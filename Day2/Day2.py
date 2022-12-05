@@ -4,27 +4,6 @@
     Date: 05/12/2022
     Description: Rock Paper Scissors Tournament.
 """
-# Pseudocode
-# For each row
-# Determin if it is a win, loss or draw
-# Compute the score for the round
-
-# Rules
-# S > P -> 3 > 2
-# P > R -> 2 > 1
-# R > S -> 1 < 3
-# # R = A = X
-# # P = B = Y
-# # S = C = Z
-###
-# 1 - Rock
-# 2 - Paper
-# 3 - Scissors
-# Plus
-# 0 - L
-# 3 - D
-# 6 - W
-
 def get_winner(symbol_1, symbol_2):
     """Get winning choice
 
@@ -71,16 +50,12 @@ def get_play_weight(symbol):
 def get_score(oponent_choice, play):
     winner = get_winner(oponent_choice, play)
     play_weight = get_play_weight(play)
-    # print(winner)
-    # print(play_weight)
 
     if winner == None:
         return play_weight + 3
     
     if winner == play:
         return play_weight + 6
-    
-    # print(play_weight, score)
 
     return play_weight
 
@@ -100,17 +75,92 @@ def get_part_1(input_list):
             
     return total
 
+def get_win_symbol(oponent_choice):
+    """Get choice to win round
+
+        Keyword argument:
+        oponent_choice -- string oponent choice
+
+        Return:
+        Win symbol string
+    """ 
+    if oponent_choice == "A":
+        return "Y"
+    if oponent_choice == "B":
+        return "Z"
+    if oponent_choice == "C":
+        return "X"
+
+def get_lose_symbol(oponent_choice):
+    """Get choice to lose round
+
+        Keyword argument:
+        oponent_choice -- string oponent choice
+
+        Return:
+        Lose symbol string
+    """ 
+    if oponent_choice == "A":
+        return "Z"
+    if oponent_choice == "B":
+        return "X"
+    if oponent_choice == "C":
+        return "Y"
+
+def get_draw_symbol(oponent_choice):
+    """Get choice to draw round
+
+        Keyword argument:
+        oponent_choice -- string oponent choice
+
+        Return:
+        Draw symbol string
+    """ 
+    if oponent_choice == "A":
+        return "X"
+    if oponent_choice == "B":
+        return "Y"
+    if oponent_choice == "C":
+        return "Z"
+
+def get_play(oponent_choice, strategy):
+    """Get choice to play
+
+        Keyword argument:
+        oponent_choice -- string oponent choice
+        strategy -- string strategy for round
+
+        Return:
+        Symbol string to play
+    """
+    if strategy == "X":
+        play = get_lose_symbol(oponent_choice)
+
+    if strategy == "Y":
+        play = get_draw_symbol(oponent_choice)
+
+    if strategy == "Z":
+        play = get_win_symbol(oponent_choice)
+
+    return play
 
 def get_part_2(input_list):
-    pass
-    # score = 0
+    """Get score following new approach
 
-    # for round in input_list:
-    #     play = get_play(round[0], round[-1])
+        Keyword argument:
+        input_list -- encrypted strategy guide
 
-    #     score += get_play_weight(round[0], play)
+        Return:
+        Total score int
+    """ 
+    total = 0
+
+    for round in input_list:
+        play = get_play(round[0], round[-1])
+
+        total += get_score(round[0], play)
     
-    # return score
+    return total
 
 
 def main():
