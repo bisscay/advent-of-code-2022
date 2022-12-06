@@ -1,13 +1,9 @@
 #!/usr/bin/python3
-"""Template.py
+"""CampCleanup.py
     Author: Bissallah Ekele - bAe
     Date: 06/12/2022
-    Description: 
+    Description: Duplicate Camp Cleanup Jobs.
 """
-# Pseudocode
-# 
-# Check if pair-a bound is within pair-b
-# Check if pair-b bound is within pair-a
 
 def is_subset(superset, subset):
     """Check if one is a subset of the other
@@ -48,19 +44,49 @@ def get_part_1(input_list):
     return count
         
 
-def get_part_2(input_list):
-    """Function description
+def is_overlap(section_a, section_b):
+    """One-way check if section is overlapping another
 
         Keyword argument:
-        input_list -- parameter description
+        section_a -- first comparing section string
+        section_b -- second comparing section string
 
         Return:
-        returned value
-
-        Throws:
-        if exceptions are thrown
+        boolean truth
     """
-    pass
+    split_a = section_a.split("-")
+    split_b = section_b.split("-")
+    return (
+        (
+            int(split_b[0]) >= int(split_a[0])
+            and int(split_b[0]) <= int(split_a[-1])
+        )
+        or (
+            int(split_b[-1]) >= int(split_a[0])
+            and int(split_b[-1]) <= int(split_a[-1])
+        )
+    )
+
+def get_part_2(input_list):
+    """Get count of partially contained pair overlaps
+
+        Keyword argument:
+        input_list -- list of section pairs
+
+        Return:
+        int count of partially contained overlaps
+    """
+    count = 0
+
+    for pair in input_list:
+        split_pair = pair.split(",")
+        if (
+            is_overlap(split_pair[0], split_pair[-1])
+            or is_overlap(split_pair[-1], split_pair[0]) # second way check
+        ):
+            count += 1
+    
+    return count
 
 def main():
     test_input = "test-input"
