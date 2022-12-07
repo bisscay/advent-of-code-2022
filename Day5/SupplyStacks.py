@@ -39,14 +39,18 @@ def get_index_y(matrix, column):
         if matrix[index][column] != "":
             return index
 
-def move(matrix, amount, postion_one, position_two):
+def move(matrix, amount, position_one, position_two, reverse_order=False):
     # Move crates following procedure 
-    from_x = postion_one - 1
+    from_x = position_one - 1
     to_x = position_two - 1
     
     while (amount != 0):
         # pop
         from_y = get_index_y(matrix, from_x)
+
+        if reverse_order:
+            from_y = from_y + amount - 1
+
         crate = matrix[from_y][from_x]
         # print(crate)
         matrix[from_y][from_x] = ""
@@ -63,18 +67,8 @@ def move(matrix, amount, postion_one, position_two):
 
     return matrix
 
-def get_part_1(input_list):
-    """Function description
-
-        Keyword argument:
-        input_list -- parameter description
-
-        Return:
-        returned value
-
-        Throws:
-        if exceptions are thrown
-    """
+def get_part_1(input_list, reverse_order=False):
+    # Find top crates following CrateMover 9000 procedure
     top_crates = []
 
     steps_start = get_steps_start(input_list)
@@ -87,12 +81,22 @@ def get_part_1(input_list):
     steps = input_list[steps_start:]
     for step in steps:
         split_step = step.split(" ")
-        stacks = move(
-            stacks,
-            int(split_step[1]),
-            int(split_step[3]),
-            int(split_step[5])
-        )
+
+        if reverse_order:
+            stacks = move(
+                stacks,
+                int(split_step[1]),
+                int(split_step[3]),
+                int(split_step[5]),
+                True
+            )
+        else:
+            stacks = move(
+                stacks,
+                int(split_step[1]),
+                int(split_step[3]),
+                int(split_step[5])
+            )
         # print(stacks)
     
     for column_index in range(len(stacks[0])):
@@ -102,24 +106,14 @@ def get_part_1(input_list):
     return "".join(top_crates)        
 
 def get_part_2(input_list):
-    """Function description
-
-        Keyword argument:
-        input_list -- parameter description
-
-        Return:
-        returned value
-
-        Throws:
-        if exceptions are thrown
-    """
-    pass
+    # Find top crates following new CrateMover 9001 procedure
+    return get_part_1(input_list, True)
 
 def main():
-    test_input = r"C:\Users\bjekele\Desktop\spaCe\pandora\adevent-of-code\advent-of-code-2022\Day5\test-input"
+    test_input = "test-input"
     puzzle_input = "puzzle-input"
 
-    file_name = test_input
+    file_name = puzzle_input #test_input
 
     with open(file_name) as f:
         input_list = f.read().splitlines()
