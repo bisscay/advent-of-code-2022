@@ -31,7 +31,7 @@ def main():
     # with open(file_name) as f:
     #     input_list = f.read().splitlines()
 
-    # print("Day_1 Part_1: " 
+    # print("Part_1: " 
     #     + str(get_part_1(input_list)) 
     #     + "\nPart_2: "
     #     + str(get_part_2(input_list)))
