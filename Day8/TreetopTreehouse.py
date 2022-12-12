@@ -4,18 +4,10 @@
     Date: 12/12/2022
     Description: Looking for enough tree cover to keep house hidden.
 """
-# Enough tree cover to keep house hidden
-# Looking along a row or column, visible trees
-# 0 - 9 tree hight
-# visible = shorter trees from edge to tree (horizontal/vertival look-up)
-# All trees at edge are visible
-# 
 # Pseudocode
-# Pick a cell
-# check-left
-# check-right
-# check-top
-# check-buttom
+# Pick an internal cell
+# check-row
+# check-column
 # if either is true, tree is visible
 
 def check(start_index, stop_index, grid_list, cell_index):
@@ -56,24 +48,50 @@ def get_part_1(input_list):
     for y_index in range(1, len(input_list)-1):
         for x_index in range(1, len(input_list[y_index])-1):
             if is_visible(y_index, x_index, input_list):
-                # print(input_list[y_index][x_index])
                 count += 1
         # print("next row")
     return count
 
+def get_before(start_index, stop_index, grid_list, cell_index):
+    # Get count before cell (left or top lookup)
+    count = 0
+    for index in range(start_index, stop_index):
+        count += 1
+        if grid_list[index] >= grid_list[cell_index]:
+            count = 1
+    return count
+
+def get_after(start_index, stop_index, grid_list, cell_index):
+    # Get count after cell (right or bottom lookup)
+    count = 0
+    for index in range(start_index, stop_index):
+        count += 1
+        if grid_list[index] >= grid_list[cell_index]:
+            return count
+    return count
+
 def get_part_2(input_list):
-    """Function description
+    # Scenic score
+    max_score = 0
+    for y_index in range(1, len(input_list)-1):
+        for x_index in range(1, len(input_list[y_index])-1):
+            # left-distance
+            left = get_before(0, x_index, input_list[y_index], x_index)
+            # right-distance
+            right = get_after(x_index+1, len(input_list[y_index]), input_list[y_index], x_index)
+            
+            # Derive scenic column parameters            
+            grid_column = [] # Extract this creation
+            for index in range(len(input_list)):
+                grid_column.append(input_list[index][x_index])
 
-        Keyword argument:
-        input_list -- parameter description
+            # top-distance
+            top = get_before(0, y_index, grid_column, y_index)
+            # bottom-distance
+            bottom = get_after(y_index+1, len(grid_column), grid_column, y_index)
 
-        Return:
-        returned value
-
-        Throws:
-        if exceptions are thrown
-    """
-    pass
+            max_score = max((top * left * right * bottom), max_score)
+    return max_score
 
 def main():
     test_input = r"test-input"
