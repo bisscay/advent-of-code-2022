@@ -20,20 +20,17 @@
 
 def check(start_index, stop_index, grid_list, cell_index):
     for index in range(start_index, stop_index):
-        print(grid_list[index], grid_list[cell_index])
+        # print(grid_list[index], grid_list[cell_index])
         if grid_list[index] >= grid_list[cell_index]:
             return False
     return True
 
 def check_row(cell_x, grid_row):
-    # check-left
-    print(check(0, cell_x, grid_row, cell_x))
-    
-    # check-right
-    # print(check(cell_x+1, len(grid_row), grid_row, cell_x))
-    # for column in range(cell_x+1, len(grid_row)):
-    return True
-
+    # check-left, check-right
+    return (
+        check(0, cell_x, grid_row, cell_x)
+        or check(cell_x+1, len(grid_row), grid_row, cell_x)
+    )
 
 def is_visible(cell_y, cell_x, grid):
     return (
@@ -47,6 +44,7 @@ def get_part_1(input_list):
     for y_index in range(1, len(input_list)-1):
         for x_index in range(1, len(input_list[y_index])-1):
             if is_visible(y_index, x_index, input_list):
+                print(input_list[y_index][x_index])
                 count += 1
         print("next row")
     print(count)
