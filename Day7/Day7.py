@@ -74,12 +74,13 @@ class Node:
     
     def __repr__(self):
         """Node string representation."""
-        return f"Node({self.file_type}: {self.node_name}, {self.children})"
+        return f"Node({self.file_type}:{self.node_name}:{self.size}, {self.children})"
         
 
 class FileSystemTree:
     def __init__(self):
         self.root = None
+        self.sum_under_100000 = 0
 
     def get_node(self, dir_name):
         # Get node with particular dir-name
@@ -110,15 +111,29 @@ class FileSystemTree:
                 Node(pwd, "dir", 0, found_node.parent, dir_map[pwd])
                 found_node.parent.children.remove(found_node)
         return self.root
-
-def get_tree(dir_map):
-    tree = FileSystemTree()
-    return tree.add(dir_map)
     
-
+    def compute_dir_size(self, node):
+        # PostOrder Traversal
+        # find all dir
+        # update node size with children size sum
+        # keep count of dir-sums below 100000     
+        if node.children != None and node.file_type == "dir":
+            # Visit children
+            for child in node.children:
+                self.compute_dir_size(child)            
+            # Visit yourself - node.visit()
+            for child in node.children:
+                node.size += child.size
+            if node.size <= 100000:
+                # print(node.node_name)
+                self.sum_under_100000 += node.size
 
 def get_part_1(input_list):
-    return get_tree(get_dir_map(input_list))
+    tree = FileSystemTree()
+    tree.add(get_dir_map(input_list))
+    tree.compute_dir_size(tree.root)
+    # print(tree.root)
+    return tree.sum_under_100000
 
 def get_part_2(input_list):
     """Function description
@@ -138,7 +153,7 @@ def main():
     test_input = r".\test-input"
     puzzle_input = "puzzle-input"
 
-    file_name = test_input
+    file_name = puzzle_input #test_input
 
     with open(file_name) as f:
         input_list = f.read().splitlines()
