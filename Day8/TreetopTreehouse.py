@@ -19,10 +19,18 @@
 # if either is true, tree is visible
 
 def is_visible(cell, grid):
-    pass
+    return True
+
 def get_part_1(input_list):
-    for row in input_list:
-        print(row)
+    # All trees at edge are visible
+    count = (len(input_list) + len(input_list[0])) * 2 - 4
+
+    for y_index in range(1, len(input_list)-1):
+        for x_index in range(1, len(input_list[y_index])-1):
+            if is_visible(input_list[y_index][x_index], input_list):
+                count += 1
+        # print("next row")
+    print(count)
 
 def get_part_2(input_list):
     """Function description
