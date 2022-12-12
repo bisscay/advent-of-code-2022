@@ -72,6 +72,7 @@ def get_after(start_index, stop_index, grid_list, cell_index):
 
 def get_part_2(input_list):
     # Scenic score
+    # Edge scores equate to 0
     max_score = 0
     for y_index in range(1, len(input_list)-1):
         for x_index in range(1, len(input_list[y_index])-1):
