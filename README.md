@@ -15,5 +15,5 @@ Task | Solution
 [Day 8](https://adventofcode.com/2022/day/8) | [TreetopTreehouse](https://github.com/bisscay/advent-of-code-2022/blob/main/Day8/TreetopTreehouse.py) 
 [Day 9](https://adventofcode.com/2022/day/9) | [RopeBridge](https://github.com/bisscay/advent-of-code-2022/blob/main/Day9/RopeBridge.py) 
 [Day 10](https://adventofcode.com/2022/day/10) | [. . .]() 
-[Day 11](https://adventofcode.com/2022/day/11) | [. . .]()
-[Day 12](https://adventofcode.com/2022/day/12) | [. . .]() 
+
+Lol, fun, but I'm going to use my brain juice for something else now.
