@@ -13,7 +13,7 @@ Task | Solution
 [Day 6](https://adventofcode.com/2022/day/6) | [TuningTrouble](https://github.com/bisscay/advent-of-code-2022/blob/main/Day6/TuningTrouble.py) 
 [Day 7](https://adventofcode.com/2022/day/7) | [. . .](https://github.com/bisscay/advent-of-code-2022/blob/main/Day7/Day7.py) 
 [Day 8](https://adventofcode.com/2022/day/8) | [TreetopTreehouse](https://github.com/bisscay/advent-of-code-2022/blob/main/Day8/TreetopTreehouse.py) 
-[Day 9](https://adventofcode.com/2022/day/9) | [. . .]() 
+[Day 9](https://adventofcode.com/2022/day/9) | [RopeBridge](https://github.com/bisscay/advent-of-code-2022/blob/main/Day9/RopeBridge.py) 
 [Day 10](https://adventofcode.com/2022/day/10) | [. . .]() 
 [Day 11](https://adventofcode.com/2022/day/11) | [. . .]()
 [Day 12](https://adventofcode.com/2022/day/12) | [. . .]() 
