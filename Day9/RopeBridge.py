@@ -24,8 +24,10 @@
 # T.track
 
 class Knot:
-    def __init__(self):
+    def __init__(self, name):
+        self.name = name
         self.x = self.y = 0
+        self.track = None
 
     def is_vertical(self, knot):
         return (
@@ -53,8 +55,8 @@ class Knot:
 
 def get_part_1(input_list):
     tail_cells = set()
-    head = Knot()
-    tail = Knot()
+    head = Knot("H")
+    tail = Knot("T")
     
     print(head.x, head.y, tail.x, tail.y)
     for motion in input_list:
@@ -120,22 +122,18 @@ def get_part_1(input_list):
                             tail.move_x(-1)
                 tail_cells.add((tail.x,tail.y))
                 print("D", step, "-->", head.x, head.y, tail.x, tail.y)
-        
+                
     print(tail_cells)
-    return len(tail_cells)
+    tail.track = tail_cells
+    return len(tail.track)
 
 def get_part_2(input_list):
-    """Function description
-
-        Keyword argument:
-        input_list -- parameter description
-
-        Return:
-        returned value
-
-        Throws:
-        if exceptions are thrown
-    """
+    # Psuedocode
+    # Link-list of 10 named knots
+    # For each motion
+    # Sliding window to move in twos through link-list
+    # Store visited cell in tail(two-of-one) track-set
+    # Return track-set size of 10th knot (named "9") 
     pass
 
 def main():
