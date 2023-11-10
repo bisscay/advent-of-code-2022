@@ -1,0 +1,4 @@
+venv*
+.vscode/
+# Ignore cached files
+*__pycache__/
